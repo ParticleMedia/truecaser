@@ -1,6 +1,6 @@
 from Truecaser import *
 import os
-import cPickle
+import pickle as cPickle
 import nltk
 import string
 import argparse

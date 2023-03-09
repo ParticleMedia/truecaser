@@ -1,16 +1,9 @@
 """
 This script trains the TrueCase System
 """
-import nltk
-import nltk.corpus
 from nltk.corpus import brown
 from nltk.corpus import reuters
-import cPickle
-import string
-import math
-import MySQLdb
-import MySQLdb.cursors
-import nltk.data
+import pickle as cPickle
 
 from TrainFunctions import *
 from EvaluateTruecaser import defaultTruecaserEvaluation
@@ -37,7 +30,7 @@ The more training data, the better the results
          
 
 # :: Option 1: Train it based on NLTK corpus ::
-print "Update from NLTK Corpus"
+print("Update from NLTK Corpus")
 NLTKCorpus = brown.sents()+reuters.sents()+nltk.corpus.semcor.sents()+nltk.corpus.conll2000.sents()+nltk.corpus.state_union.sents()
 updateDistributionsFromSentences(NLTKCorpus, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
 
