@@ -48,13 +48,20 @@ The more training data, the better the results
 """
 
 
-def train_nltk(out_file):
+def train_nltk(in_file, out_file):
     down_nltk()
     uniDist, backwardBiDist, forwardBiDist, trigramDist, wordCasingLookup = init()
     # :: Option 1: Train it based on NLTK corpus ::
     print("Update from NLTK Corpus")
     NLTKCorpus = brown.sents()+reuters.sents()+nltk.corpus.semcor.sents()+nltk.corpus.conll2000.sents()+nltk.corpus.state_union.sents()
     NLTKCorpus = [x[1:] for x in NLTKCorpus if len(x) > 1]
+    if in_file is not None:
+        sentences = []
+        for line in open(in_file):
+            sentences.append(line.strip())
+        tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
+        tokens = [x[1:] for x in tokens if len(x) > 1]
+        NLTKCorpus += tokens
     updateDistributionsFromSentences(NLTKCorpus, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
     defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
     save_model(uniDist, backwardBiDist, forwardBiDist, trigramDist, wordCasingLookup, out_file)
