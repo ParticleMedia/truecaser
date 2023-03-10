@@ -1,6 +1,7 @@
 """
 This script trains the TrueCase System
 """
+import nltk
 from nltk.corpus import brown
 from nltk.corpus import reuters
 import pickle as cPickle
@@ -8,6 +9,11 @@ import pickle as cPickle
 from TrainFunctions import *
 from EvaluateTruecaser import defaultTruecaserEvaluation
 
+nltk.download('brown')
+nltk.download('reuters')
+nltk.download('semcor')
+nltk.download('conll2000')
+nltk.download('state_union')
 
 uniDist = nltk.FreqDist()
 backwardBiDist = nltk.FreqDist() 
@@ -32,6 +38,7 @@ The more training data, the better the results
 # :: Option 1: Train it based on NLTK corpus ::
 print("Update from NLTK Corpus")
 NLTKCorpus = brown.sents()+reuters.sents()+nltk.corpus.semcor.sents()+nltk.corpus.conll2000.sents()+nltk.corpus.state_union.sents()
+NLTKCorpus = [x[1:] for x in NLTKCorpus]
 updateDistributionsFromSentences(NLTKCorpus, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
 
 # :: Option 2: Train it based the train.txt file ::
