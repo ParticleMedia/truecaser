@@ -38,8 +38,9 @@ The more training data, the better the results
 
 # :: Option 1: Train it based on NLTK corpus ::
 print("Update from NLTK Corpus")
-NLTKCorpus = brown.sents()+reuters.sents()+nltk.corpus.semcor.sents()+nltk.corpus.conll2000.sents()+nltk.corpus.state_union.sents()
-NLTKCorpus = [x[1:] for x in NLTKCorpus]
+# NLTKCorpus = brown.sents()+reuters.sents()+nltk.corpus.semcor.sents()+nltk.corpus.conll2000.sents()+nltk.corpus.state_union.sents()
+NLTKCorpus = brown.sents()
+NLTKCorpus = [x[1:] for x in NLTKCorpus if len(x) > 1]
 updateDistributionsFromSentences(NLTKCorpus, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
 
 # :: Option 2: Train it based the train.txt file ::
