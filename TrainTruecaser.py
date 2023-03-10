@@ -73,8 +73,8 @@ def train(in_file, out_file):
 
     tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
     tokens = [x[1:] for x in tokens if len(x) > 1]
-    print(f"training sentence number: {len(tokens)}")
     updateDistributionsFromSentences(tokens, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
+    print(f"training sentence number: {len(tokens)}")
     defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
     save_model(uniDist, backwardBiDist, forwardBiDist, trigramDist, wordCasingLookup, out_file)
    
