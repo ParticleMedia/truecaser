@@ -56,9 +56,9 @@ def train_nltk(out_file):
     NLTKCorpus = brown.sents()+reuters.sents()+nltk.corpus.semcor.sents()+nltk.corpus.conll2000.sents()+nltk.corpus.state_union.sents()
     NLTKCorpus = [x[1:] for x in NLTKCorpus if len(x) > 1]
     updateDistributionsFromSentences(NLTKCorpus, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
-    print(f"training sentence number: {len(NLTKCorpus)}")
     defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
     save_model(uniDist, backwardBiDist, forwardBiDist, trigramDist, wordCasingLookup, out_file)
+    print(f"finished training sentence number: {len(NLTKCorpus)}")
 
 
 def train(in_file, out_file):
@@ -74,11 +74,12 @@ def train(in_file, out_file):
     tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
     tokens = [x[1:] for x in tokens if len(x) > 1]
     updateDistributionsFromSentences(tokens, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
-    print(f"training sentence number: {len(tokens)}")
     defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
     save_model(uniDist, backwardBiDist, forwardBiDist, trigramDist, wordCasingLookup, out_file)
-   
-# :: Option 3: Train it based ngrams tables from http://www.ngrams.info/download_coca.asp ::    
+    print(f"finished training sentence number: {len(tokens)}")
+
+
+# :: Option 3: Train it based ngrams tables from http://www.ngrams.info/download_coca.asp ::
 '''#Uncomment, if you want to train from train.txt
 print("Update Bigrams / Trigrams")
 updateDistributionsFromNgrams('ngrams/w2.txt', 'ngrams/w3.txt', wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)'''
