@@ -14,6 +14,7 @@ nltk.download('reuters')
 nltk.download('semcor')
 nltk.download('conll2000')
 nltk.download('state_union')
+nltk.download('punkt')
 
 uniDist = nltk.FreqDist()
 backwardBiDist = nltk.FreqDist() 
