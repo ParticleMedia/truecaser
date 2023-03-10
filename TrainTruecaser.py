@@ -58,7 +58,7 @@ print "Update Bigrams / Trigrams"
 updateDistributionsFromNgrams('ngrams/w2.txt', 'ngrams/w3.txt', wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
 """
 
-f = open('distributions.obj', 'wb')
+f = open('/mnt/nlp/search/query_understanding/distributions.obj', 'wb')
 cPickle.dump(uniDist, f, protocol=cPickle.HIGHEST_PROTOCOL)
 cPickle.dump(backwardBiDist, f, protocol=cPickle.HIGHEST_PROTOCOL)
 cPickle.dump(forwardBiDist, f, protocol=cPickle.HIGHEST_PROTOCOL)
@@ -71,7 +71,7 @@ f.close()
 # :: Correct sentences ::
 
 defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
-        
+
         
 
 
