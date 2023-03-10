@@ -42,6 +42,7 @@ print("Update from NLTK Corpus")
 NLTKCorpus = brown.sents()
 NLTKCorpus = [x[1:] for x in NLTKCorpus if len(x) > 1]
 updateDistributionsFromSentences(NLTKCorpus, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
+defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
 
 # :: Option 2: Train it based the train.txt file ::
 #Uncomment, if you want to train from train.txt
@@ -52,12 +53,12 @@ for line in open('train.txt'):
     
 tokens = [nltk.word_tokenize(sentence) for sentence in sentences]
 updateDistributionsFromSentences(tokens, wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
-
+defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
    
 # :: Option 3: Train it based ngrams tables from http://www.ngrams.info/download_coca.asp ::    
-#Uncomment, if you want to train from train.txt
+'''#Uncomment, if you want to train from train.txt
 print("Update Bigrams / Trigrams")
-updateDistributionsFromNgrams('ngrams/w2.txt', 'ngrams/w3.txt', wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
+updateDistributionsFromNgrams('ngrams/w2.txt', 'ngrams/w3.txt', wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)'''
 
 
 f = open('/mnt/nlp/search/query_understanding/distributions.obj', 'wb')
@@ -67,12 +68,6 @@ cPickle.dump(forwardBiDist, f, protocol=cPickle.HIGHEST_PROTOCOL)
 cPickle.dump(trigramDist, f, protocol=cPickle.HIGHEST_PROTOCOL)
 cPickle.dump(wordCasingLookup, f, protocol=cPickle.HIGHEST_PROTOCOL)
 f.close()
-
-
-        
-# :: Correct sentences ::
-
-defaultTruecaserEvaluation(wordCasingLookup, uniDist, backwardBiDist, forwardBiDist, trigramDist)
 
         
 
